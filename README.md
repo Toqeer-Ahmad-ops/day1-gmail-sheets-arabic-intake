@@ -1,29 +1,46 @@
-Qoton Urgency Bot - Dubai 🇦🇪
-Automated Arabic rush-order alerts for retail print ops
+# Day 1: Gmail → Google Sheets Arabic Order Intake
 
-Built: June 2025 | Learning AI since: April 2025
-Stack: n8n, Gemini 2.5 Flash, Google Sheets, Gmail API, WhatsApp API
-ROI: 12.5 AED saved per urgent order → 1,250 AED/mo projected
+**Part 1 of 4**: Foundation for Arabic عاجل → Telegram Bot system
 
-🎯 Problem
-At Qoton Printing Dubai, rush orders marked عاجل in Arabic notes were missed.
-15min delay = 12.5 AED loss per order.
+**Built**: June 2025 | **For**: Qoton Printing Dubai
 
-⚡ Solution
-n8n workflow reads Arabic notes → Gemini 2.5 flags عاجل/ضروري → Instant Gmail + WhatsApp alert
+## 🎯 Problem
 
-Flow: Google Sheets → Gemini NLP → IF urgent → Gmail + WhatsApp → Mark processed
+Qoton Printing Dubai receives 50+ Arabic orders/day via Gmail. Manual copy-paste to Sheets takes 2hrs/day. Rush orders marked **عاجل** in Arabic notes were missed. 15min delay = 12.5 AED loss per order.
 
-📊 Results
-4/5 orders flagged correctly in test
-8 seconds end-to-end latency
-12.5 AED saved per order
-100% Arabic عاجل detection
-🚀 Demo
-Loom video: [Coming after Day 4 WhatsApp integration]
+## ⚡ Solution — Day 1
 
-🛠️ Setup
-Import qoton-urgency-bot.json to n8n
-Add Gemini API key + Gmail OAuth
-Connect Google Sheet with Order_ID | Product | Arabic_Note
-Status: Day 3 complete. Day 4: Adding WhatsApp API. Day 5: Write-back to Sheet.
+**n8n workflow**: Gmail → Google Sheets automation
+
+**Flow**: Gmail trigger → Extract Order_ID, Product, Arabic_Note → Append to Sheet
+
+**Result**: 50+ emails/day → Structured data in Sheets. Zero manual entry.
+
+## 📊 Results
+
+- **Time saved**: 2 hours/day manual work → 0 seconds
+- **Data structure**: Order_ID | Product | Arabic_Note columns
+- **Foundation set**: Feeds Day 2 Gemini NLP for urgency detection
+
+## 🛠 Tech Stack
+
+**n8n** | **Gmail API** | **Google Sheets API**
+
+## 🚀 Evolution
+
+This Day 1 intake feeds the full system:
+1. **Day 2**: Gemini detects عاجل/ضروري from Arabic_Note
+2. **Day 3**: n8n routes if urgent = true 
+3. **Day 4**: Telegram sends instant Arabic alert
+
+**See complete system**: [arabic-urgency-telegram-bot](https://github.com/Toqeer-Ahmad-ops/arabic-urgency-telegram-bot)
+
+## Setup
+
+1. Import workflow: `/workflows/day1-gmail-sheets.json`
+2. Add Gmail OAuth + Google Sheets credentials
+3. Connect Sheet with headers: Order_ID | Product | Arabic_Note
+
+---
+**Status**: Day 1 Complete → Upgraded to Day 4 production system
+**Next**: See Day 4 repo for live Telegram alerts + $0 cost proof
